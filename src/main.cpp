@@ -7,17 +7,25 @@
 //temporaries
 #include "Hitbox.h"
 
-#define MAXFPS 10
-
+const int MAXFPS = 60;
 const long long int MAXMS = 1000000/MAXFPS;
-Hitbox box1(300, 300);
-Hitbox box2(100, 100);
+
+int dir = 1;
+Hitbox box1(400, 300);
+Hitbox box2(300, 300);
 sf::Color current_color = sf::Color::Green;
 
 void update() {
-    box1.rotate_rad(0.1);
-    box1.translate(1, 1);
-    if (box1.collision(box2)) {
+    if (box2.get_center()->x > 600) {
+        dir = -1;
+    } else if (box2.get_center()->x < 200) {
+        dir = 1;
+    }
+    box1.rotate_rad(-0.03);
+    box2.rotate_rad(0.01);
+    box2.translate(1*dir, 0);
+    bool collided = box1.collision(box2);
+    if (collided) {
         current_color = sf::Color::Red;
     } else {
         current_color = sf::Color::Green;
@@ -29,24 +37,24 @@ void draw(sf::RenderWindow* window) {
     sf::VertexArray box2_draw(sf::Lines, 8);
     int index;
     for (index = 0; index < 3; index++) {
-        box1_draw[index*2].position = sf::Vector2f(box1.vertices[index].x, box1.vertices[index].y);
+        box1_draw[index*2].position = sf::Vector2f(box1.get_vertices()[index].x, box1.get_vertices()[index].y);
         box1_draw[index*2].color = current_color;
-        box1_draw[index*2 + 1].position = sf::Vector2f(box1.vertices[index + 1].x, box1.vertices[index + 1].y);
+        box1_draw[index*2 + 1].position = sf::Vector2f(box1.get_vertices()[index + 1].x, box1.get_vertices()[index + 1].y);
         box1_draw[index*2 + 1].color = current_color;
     }
-    box1_draw[6].position = sf::Vector2f(box1.vertices[3].x, box1.vertices[3].y);
+    box1_draw[6].position = sf::Vector2f(box1.get_vertices()[3].x, box1.get_vertices()[3].y);
     box1_draw[6].color = current_color;
-    box1_draw[7].position = sf::Vector2f(box1.vertices[0].x, box1.vertices[0].y);
+    box1_draw[7].position = sf::Vector2f(box1.get_vertices()[0].x, box1.get_vertices()[0].y);
     box1_draw[7].color = current_color;
     for (index = 0; index < 3; index++) {
-        box2_draw[index*2].position = sf::Vector2f(box2.vertices[index].x, box2.vertices[index].y);
+        box2_draw[index*2].position = sf::Vector2f(box2.get_vertices()[index].x, box2.get_vertices()[index].y);
         box2_draw[index*2].color = current_color;
-        box2_draw[index*2 + 1].position = sf::Vector2f(box2.vertices[index + 1].x, box2.vertices[index + 1].y);
+        box2_draw[index*2 + 1].position = sf::Vector2f(box2.get_vertices()[index + 1].x, box2.get_vertices()[index + 1].y);
         box2_draw[index*2 + 1].color = current_color;
     }
-    box2_draw[6].position = sf::Vector2f(box2.vertices[3].x, box2.vertices[3].y);
+    box2_draw[6].position = sf::Vector2f(box2.get_vertices()[3].x, box2.get_vertices()[3].y);
     box2_draw[6].color = current_color;
-    box2_draw[7].position = sf::Vector2f(box2.vertices[0].x, box2.vertices[0].y);
+    box2_draw[7].position = sf::Vector2f(box2.get_vertices()[0].x, box2.get_vertices()[0].y);
     box2_draw[7].color = current_color;
     window->draw(box1_draw);
     window->draw(box2_draw);
@@ -54,8 +62,8 @@ void draw(sf::RenderWindow* window) {
 
 int main()
 {
-    Hitbox::rectangle(&box1, 20, 30);
-    Hitbox::rectangle(&box2, 30, 40);
+    Hitbox::rectangle(&box1, 100, 100);
+    Hitbox::rectangle(&box2, 60, 40);
 
     using namespace std::chrono;
 

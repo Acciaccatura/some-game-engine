@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1506888542 source:c:\users\willi\code\ccpp\babysfirstgame\src\main.cpp
+1507372013 source:c:\users\willi\code\ccpp\babysfirstgame\src\main.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	<chrono>
@@ -395,12 +395,13 @@
 	<string>
 	<vector>
 
-1506888812 source:c:\users\willi\code\ccpp\babysfirstgame\src\hitbox.cpp
+1507371760 source:c:\users\willi\code\ccpp\babysfirstgame\src\hitbox.cpp
 	<stdlib.h>
 	<math.h>
+	<iostream>
 	"Hitbox.h"
 
-1506888845 c:\users\willi\code\ccpp\babysfirstgame\include\hitbox.h
+1507371739 c:\users\willi\code\ccpp\babysfirstgame\include\hitbox.h
 
 1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\luabridge.h
 	<cassert>

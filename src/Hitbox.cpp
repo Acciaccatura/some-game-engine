@@ -14,6 +14,18 @@ Hitbox::~Hitbox()
     free(this->vertices);
 }
 
+Point* Hitbox::get_center() {
+    return &(this->center);
+}
+
+Point* Hitbox::get_vertices() {
+    return this->vertices;
+}
+
+int Hitbox::get_edges() {
+    return this->edges;
+}
+
 void Hitbox::translate(double x, double y) {
     this->center.x += x;
     this->center.y += y;
@@ -43,19 +55,39 @@ void Hitbox::rotate_rad(double rad) {
 }
 
 /**
- * get the minimum and maximum dot products relative to a vector
+ * get the minimum and maximum points of a hitbox
+ * keep in mind hitboxes must be convex so once we
+ * find a minimum and maximum value we can stop!
+ *
+ * Until I figure out how to implement that without
+ * sacrificing performance you just get a loop. lmao
+ */
+bool Hitbox::minmax(Point vec, double* min, double* max) {
+     int index;
+     double min_temp = INFINITY;
+     double max_temp = -INFINITY;
+     for (index = 0; index < this->edges; index++) {
+         double calc = ((this->vertices[index].x) * vec.x) + ((this->vertices[index].y) * vec.y);
+         if (calc > max_temp) max_temp = calc;
+         if (calc < min_temp) min_temp = calc;
+     }
+     *min = min_temp;
+     *max = max_temp;
+     return min_temp <= max_temp;
+}
+
+/**
+ * get overlap between two hitboxes
  * returns vec * vec because i feel like it
  */
 
-double Hitbox::get_minmax(Point vec, double* start_dot, double* end_dot) {
-    int index;
-    double dot = vec.x * vec.x + vec.y * vec.y;
-    for (index = 0; index < this->edges; index++) {
-        double calc = (this->vertices[index].x * vec.x) + (this->vertices[index].y * vec.y);
-        if (calc > *end_dot) *end_dot = calc;
-        if (calc < *start_dot) *start_dot = calc;
-    }
-    return dot;
+double Hitbox::overlap(Point vec, Hitbox other) {
+    //TODO: this
+    double start_x, end_x, start_y, end_y;
+    this->minmax(vec, &start_x, &end_x);
+    other.minmax(vec, &start_y, &end_y);
+    bool is_overlapping = (start_x <= start_y && end_x >= start_y) || (start_x >= start_y && end_x <= end_y) || (start_x <= start_y && end_x >= end_y) || (start_x <= end_y && end_x >= end_y);
+    return is_overlapping;
 }
 
 /**
@@ -64,7 +96,7 @@ double Hitbox::get_minmax(Point vec, double* start_dot, double* end_dot) {
  */
 bool Hitbox::collision(Hitbox box) {
     //get number of things to test for this
-    int my_edges, index;
+    int my_edges, their_edges, index;
     my_edges = this->edges;
     if (!(this->edges & 1)) {
         //since we're dealing with regular polygons,
@@ -73,13 +105,28 @@ bool Hitbox::collision(Hitbox box) {
         my_edges >>= 1;
     }
     for (index = 1; index < my_edges; index++) {
-        Point base = {this->vertices[index].x - this->vertices[index-1].x, this->vertices[index].y - this->vertices[index - 1].y};
-        double start_dot, end_dot;
-        double base_dot = box.get_minmax(base, &start_dot, &end_dot);
-        //if even one of these perspectives do not have an overlap, there is no collision
-        if ((start_dot > base_dot && end_dot > base_dot) || (start_dot < 0 && end_dot < 0)) {
+        Point base = {this->vertices[index].x - this->vertices[index - 1].x, this->vertices[index].y - this->vertices[index - 1].y};
+        if (!box.overlap(base, *this)) {
             return false;
         }
+    }
+    Point base = {this->vertices[this->edges - 1].x - this->vertices[0].x, this->vertices[this->edges - 1].y - this->vertices[0].y};
+    if (!box.overlap(base, *this)) {
+        return false;
+    }
+    their_edges = box.edges;
+    if (!(this->edges & 1)) {
+        their_edges >>= 1;
+    }
+    for (index = 1; index < their_edges; index++) {
+        Point base = {box.vertices[index].x - box.vertices[index - 1].x, box.vertices[index].y - box.vertices[index - 1].y};
+        if (!this->overlap(base, box)) {
+            return false;
+        }
+    }
+    base = {box.vertices[box.edges - 1].x - box.vertices[0].x, box.vertices[box.edges - 1].y - box.vertices[0].y};
+    if (!this->overlap(base, box)) {
+        return false;
     }
     return true;
 }
