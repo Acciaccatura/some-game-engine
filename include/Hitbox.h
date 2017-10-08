@@ -16,8 +16,6 @@ class Hitbox
         Point* get_vertices();
         int get_edges();
 
-        bool minmax(Point, double*, double*);
-        double overlap(Point, Hitbox*);
         bool collision(Hitbox*);
 
         void rotate_rad(double);
@@ -34,6 +32,8 @@ class Hitbox
 
         Hitbox(double x, double y);
     private:
+        bool minmax(Point, double*, double*);
+        double overlap(Point, Hitbox*);
 };
 
 #endif // HITBOX_H
