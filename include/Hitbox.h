@@ -1,3 +1,4 @@
+#include <SFML/Graphics.hpp>
 #ifndef HITBOX_H
 #define HITBOX_H
 
@@ -8,7 +9,6 @@ typedef struct {
 class Hitbox
 {
     public:
-        Hitbox(double x, double y);
         virtual ~Hitbox();
 
         //getters
@@ -17,17 +17,22 @@ class Hitbox
         int get_edges();
 
         bool minmax(Point, double*, double*);
-        bool collision(Hitbox);
+        double overlap(Point, Hitbox*);
+        bool collision(Hitbox*);
+
         void rotate_rad(double);
         void translate(double, double);
-        double overlap(Point, Hitbox);
+        void draw(sf::RenderWindow*, sf::Color);
 
-        static Hitbox* rectangle(Hitbox*, double, double);
+        static Hitbox* rectangle(double, double, double, double);
+        static Hitbox* triangle(double, double, double);
     protected:
         Point center;
         Point* vertices;
         int edges;
         double rads;
+
+        Hitbox(double x, double y);
     private:
 };
 
