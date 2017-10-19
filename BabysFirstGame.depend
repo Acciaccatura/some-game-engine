@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1507452271 source:c:\users\willi\code\ccpp\babysfirstgame\src\main.cpp
+1508380096 source:c:\users\willi\code\ccpp\babysfirstgame\src\main.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	<chrono>
 	<ratio>
 	<thread>
-	"Hitbox.h"
+	"RegularHitbox.h"
 
 1504594494 c:\mingw-6.1.0\sfml-2.4.2\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -395,16 +395,16 @@
 	<string>
 	<vector>
 
-1507453951 source:c:\users\willi\code\ccpp\babysfirstgame\src\hitbox.cpp
+1508380159 source:c:\users\willi\code\ccpp\babysfirstgame\src\hitbox.cpp
 	<stdlib.h>
 	<math.h>
 	<iostream>
 	"Hitbox.h"
 
-1507452126 c:\users\willi\code\ccpp\babysfirstgame\include\hitbox.h
+1508397217 c:\users\willi\code\ccpp\babysfirstgame\include\hitbox.h
 	<SFML/Graphics.hpp>
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\luabridge.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\luabridge.h
 	<cassert>
 	<sstream>
 	<stdexcept>
@@ -424,7 +424,7 @@
 	"detail/CFunctions.h"
 	"detail/Namespace.h"
 
-1506419149 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\luahelpers.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\luahelpers.h
 
 1506417150 c:\users\willi\code\ccpp\babysfirstgame\include\lua-5.3.4\include\lua.hpp
 	"lua.h"
@@ -450,27 +450,81 @@
 	<stdio.h>
 	"lua.h"
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\typetraits.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\typetraits.h
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\typelist.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\typelist.h
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\functraits.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\functraits.h
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\constructor.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\constructor.h
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\stack.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\stack.h
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\classinfo.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\classinfo.h
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\luaexception.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\luaexception.h
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\luaref.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\luaref.h
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\iterator.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\iterator.h
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\userdata.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\userdata.h
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\cfunctions.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\cfunctions.h
 
-1506416959 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\namespace.h
+1508228553 c:\users\willi\code\ccpp\babysfirstgame\include\luabridge\detail\namespace.h
+
+1507778854 source:c:\users\willi\code\ccpp\babysfirstgame\src\room.cpp
+	<stdlib.h>
+	"Room.h"
+
+1507499219 c:\users\willi\code\ccpp\babysfirstgame\include\room.h
+	"Hitbox.h"
+
+1507540689 source:c:\users\willi\code\ccpp\babysfirstgame\src\object.cpp
+	<stdlib.h>
+	<stdarg.h>
+	"Object.h"
+
+1508230339 c:\users\willi\code\ccpp\babysfirstgame\include\object.h
+	"Hitbox.h"
+
+1103766784 c:\lua-5.3.4\src\lua.hpp
+	"lua.h"
+	"lualib.h"
+	"lauxlib.h"
+
+1482425480 c:\lua-5.3.4\src\lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1482415730 c:\lua-5.3.4\src\luaconf.h
+	<limits.h>
+	<stddef.h>
+	<stdint.h>
+	<assert.h>
+
+1484244866 c:\lua-5.3.4\src\lualib.h
+	"lua.h"
+
+1481039671 c:\lua-5.3.4\src\lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1508397150 c:\users\willi\code\ccpp\babysfirstgame\include\regularhitbox.h
+	<Hitbox.h>
+
+1508398345 source:c:\users\willi\code\ccpp\babysfirstgame\src\regularhitbox.cpp
+	<stdlib.h>
+	<math.h>
+	<iostream>
+	"RegularHitbox.h"
+
+1508397238 source:c:\users\willi\code\ccpp\babysfirstgame\src\circularhitbox.cpp
+	"CircularHitbox.h"
+
+1508397229 c:\users\willi\code\ccpp\babysfirstgame\include\circularhitbox.h
+	<Hitbox.h>
 

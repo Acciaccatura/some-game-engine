@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+
 #ifndef HITBOX_H
 #define HITBOX_H
 
@@ -11,6 +12,7 @@ class Hitbox
     public:
         virtual ~Hitbox();
 
+        bool active;
         //getters
         Point* get_center();
         Point* get_vertices();
@@ -18,12 +20,11 @@ class Hitbox
 
         bool collision(Hitbox*);
 
-        void rotate_rad(double);
-        void translate(double, double);
-        void draw(sf::RenderWindow*, sf::Color);
+        virtual void rotate_rad(double) = 0;
+        virtual void translate(double, double) = 0;
+        virtual void draw(sf::RenderWindow*, sf::Color) = 0;
 
-        static Hitbox* rectangle(double, double, double, double);
-        static Hitbox* triangle(double, double, double);
+        virtual bool minmax(Point*, double*, double*) = 0;
     protected:
         Point center;
         Point* vertices;
@@ -31,9 +32,9 @@ class Hitbox
         double rads;
 
         Hitbox(double x, double y);
+
+        virtual bool collides(Hitbox*) = 0;
     private:
-        bool minmax(Point, double*, double*);
-        double overlap(Point, Hitbox*);
 };
 
 #endif // HITBOX_H

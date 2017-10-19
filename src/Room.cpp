@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "Room.h"
 
 Room::Room()
@@ -8,4 +9,5 @@ Room::Room()
 Room::~Room()
 {
     //dtor
+    //free(this->boxes);
 }

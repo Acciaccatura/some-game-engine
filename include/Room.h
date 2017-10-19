@@ -1,6 +1,6 @@
 #ifndef ROOM_H
 #define ROOM_H
-
+#include "Hitbox.h"
 
 class Room
 {

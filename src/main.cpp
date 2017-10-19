@@ -5,14 +5,14 @@
 #include <thread>
 
 //temporaries
-#include "Hitbox.h"
+#include "RegularHitbox.h"
 
 const int MAXFPS = 60;
 const long long int MAXMS = 1000000/MAXFPS;
 
 int dir = 1;
-Hitbox* box1 = Hitbox::rectangle(400, 300, 100, 30);
-Hitbox* box2 = Hitbox::rectangle(300, 300, 50, 600);
+RegularHitbox* box1 = RegularHitbox::rectangle(400, 300, 100, 30);
+RegularHitbox* box2 = RegularHitbox::regular_polygon(200, 300, 3, 30);
 sf::Color current_color = sf::Color::Green;
 
 void update() {
