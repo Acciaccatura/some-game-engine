@@ -5,6 +5,7 @@
 		<Option title="BabysFirstGame" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="hitbox\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/BabysFirstGame" prefix_auto="1" extension_auto="1" />
@@ -15,8 +16,8 @@
 					<Add option="-g" />
 					<Add directory="C:/mingw-6.1.0/SFML-2.4.2/include" />
 					<Add directory="C:/lua-5.3.4/src" />
-					<Add directory="include/luabridge" />
 					<Add directory="include" />
+					<Add directory="include/luabridge" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-graphics-d" />
@@ -43,15 +44,26 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="include/CircularHitbox.h" />
-		<Unit filename="include/Hitbox.h" />
+		<Unit filename="include/AnimationFrame.h" />
+		<Unit filename="include/Hitbox.h">
+			<Option virtualFolder="hitbox/" />
+		</Unit>
+		<Unit filename="include/IterList.h" />
 		<Unit filename="include/Object.h" />
-		<Unit filename="include/RegularHitbox.h" />
+		<Unit filename="include/RegularHitbox.h">
+			<Option virtualFolder="hitbox/" />
+		</Unit>
 		<Unit filename="include/Room.h" />
-		<Unit filename="src/CircularHitbox.cpp" />
-		<Unit filename="src/Hitbox.cpp" />
+		<Unit filename="include/myaux.h" />
+		<Unit filename="src/AnimationFrame.cpp" />
+		<Unit filename="src/Hitbox.cpp">
+			<Option virtualFolder="hitbox/" />
+		</Unit>
+		<Unit filename="src/IterList.cpp" />
 		<Unit filename="src/Object.cpp" />
-		<Unit filename="src/RegularHitbox.cpp" />
+		<Unit filename="src/RegularHitbox.cpp">
+			<Option virtualFolder="hitbox/" />
+		</Unit>
 		<Unit filename="src/Room.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>

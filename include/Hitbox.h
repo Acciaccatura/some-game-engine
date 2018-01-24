@@ -1,11 +1,9 @@
 #include <SFML/Graphics.hpp>
+#include <myaux.h>
+#include "IterList.h"
 
 #ifndef HITBOX_H
 #define HITBOX_H
-
-typedef struct {
-    double x, y;
-} Point;
 
 class Hitbox
 {
@@ -13,6 +11,7 @@ class Hitbox
         virtual ~Hitbox();
 
         bool active;
+        IterListElem<Hitbox>* elem;
         //getters
         Point* get_center();
         Point* get_vertices();
@@ -25,16 +24,20 @@ class Hitbox
         virtual void draw(sf::RenderWindow*, sf::Color) = 0;
 
         virtual bool minmax(Point*, double*, double*) = 0;
+
     protected:
         Point center;
         Point* vertices;
         int edges;
         double rads;
+        double radius;
 
         Hitbox(double x, double y);
 
         virtual bool collides(Hitbox*) = 0;
+
     private:
+
 };
 
 #endif // HITBOX_H

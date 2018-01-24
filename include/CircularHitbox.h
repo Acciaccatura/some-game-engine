@@ -1,3 +1,5 @@
+/*
+
 #ifndef CIRCULARHITBOX_H
 #define CIRCULARHITBOX_H
 
@@ -17,8 +19,6 @@ class CircularHitbox : public Hitbox
         virtual void draw(sf::RenderWindow*, sf::Color) = 0;
 
     protected:
-        double radius;
-        bool shit;
 
         virtual bool collides(Hitbox*);
 
@@ -26,3 +26,5 @@ class CircularHitbox : public Hitbox
 };
 
 #endif // CIRCULARHITBOX_H
+
+*/

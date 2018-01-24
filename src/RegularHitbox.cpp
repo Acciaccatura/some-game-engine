@@ -7,9 +7,16 @@
 #define PI 3.14159265
 #endif
 
-RegularHitbox::RegularHitbox(double x, double y) :Hitbox(x, y)
+RegularHitbox::RegularHitbox(double x, double y, double radius, int edges) :Hitbox(x, y)
 {
-
+    this->edges = edges;
+    this->radius = radius;
+    this->vertices = (Point*) malloc(sizeof(Point)*edges);
+    double radians = 2*PI/edges;
+    int index;
+    for (index = 0; index < edges; index++) {
+        this->vertices[index] = {cos(radians*index)*radius, sin(radians*index)*radius};
+    }
 }
 
 RegularHitbox::~RegularHitbox()
@@ -116,29 +123,18 @@ bool RegularHitbox::collides(Hitbox* box) {
  * Returns a pointer to said hitbox.
  * Maybe make it so that it just returns the hitbox and
  * you don't have to pass it a pointer to some memory.
- *
  */
 RegularHitbox* RegularHitbox::rectangle(double x, double y, double x_length, double y_length) {
-    RegularHitbox* box = new RegularHitbox(x, y);
     x_length /= 2;
     y_length /= 2;
+    double root = sqrt(x_length*x_length + y_length*y_length);
+    RegularHitbox* box = new RegularHitbox(x, y, root, 4);
     box->edges = 4;
+    box->radius = sqrt(x_length*x_length + y_length*y_length);
     box->vertices = (Point*) malloc(sizeof(Point)*4);
     box->vertices[0] = {-x_length, -y_length};
     box->vertices[1] = {x_length, -y_length};
     box->vertices[2] = {x_length, y_length};
     box->vertices[3] = {-x_length, y_length};
-    return box;
-}
-
-RegularHitbox* RegularHitbox::regular_polygon(double x, double y, int edges, double radius) {
-    RegularHitbox* box = new RegularHitbox(x, y);
-    box->edges = edges;
-    box->vertices = (Point*) malloc(sizeof(Point)*edges);
-    double radians = 2*PI/edges;
-    int index;
-    for (index = 0; index < edges; index++) {
-        box->vertices[index] = {cos(radians*index)*radius, sin(radians*index)*radius};
-    }
     return box;
 }

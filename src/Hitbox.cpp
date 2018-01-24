@@ -7,8 +7,6 @@
 #define PI 3.14159265
 #endif
 
-
-
 Hitbox::Hitbox(double x, double y)
 {
     this->rads = 0;

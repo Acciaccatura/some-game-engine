@@ -5,41 +5,47 @@
 #include <thread>
 
 //temporaries
+#include "IterList.h"
 #include "RegularHitbox.h"
 
 const int MAXFPS = 60;
 const long long int MAXMS = 1000000/MAXFPS;
+IterList<Hitbox>* hitboxes;
+Hitbox* box1, *box2;
 
-int dir = 1;
-RegularHitbox* box1 = RegularHitbox::rectangle(400, 300, 100, 30);
-RegularHitbox* box2 = RegularHitbox::regular_polygon(200, 300, 3, 30);
-sf::Color current_color = sf::Color::Green;
+void init() {
+    hitboxes = new IterList<Hitbox>();
+    box1 = RegularHitbox::rectangle(50, 150, 200, 50);
+    box2 = new RegularHitbox(300, 160, 40, 5);
+    hitboxes->add(box1);
+    hitboxes->add(box2);
+}
 
-void update() {
-    if (box2->get_center()->x > 600) {
-        dir = -1;
-    } else if (box2->get_center()->x < 200) {
-        dir = 1;
+void update(sf::RenderWindow* window) {
+    Hitbox* box = hitboxes->head();
+    sf::Color color = sf::Color::Green;
+    while (box) {
+        Hitbox* next = hitboxes->next();
+        IterListElem<Hitbox>* temp_iter;
+        for (temp_iter = hitboxes->expose(); temp_iter > 0; temp_iter = temp_iter->next) {
+            if (box->collision(temp_iter->obj))
+                color = sf::Color::Red;
+            else
+                color = sf::Color::Green;
+        }
+        box->draw(window, color);
+        box = next;
     }
-    box1->rotate_rad(-0.03);
-    box2->rotate_rad(0.01);
-    box2->translate(dir, 0);
-    bool collided = box1->collision(box2);
-    if (collided) {
-        current_color = sf::Color::Red;
-    } else {
-        current_color = sf::Color::Green;
-    }
+    box1->translate(5, 0);
+    box2->rotate_rad(0.1);
 }
 
 void draw(sf::RenderWindow* window) {
-    box1->draw(window, current_color);
-    box2->draw(window, current_color);
+
 }
 
 int main()
 {
-
     using namespace std::chrono;
 
     sf::RenderWindow window(sf::VideoMode(800, 600), "Window!");
@@ -47,6 +53,8 @@ int main()
     time_point<high_resolution_clock> prev = high_resolution_clock::now();
     time_point<high_resolution_clock> now = high_resolution_clock::now();
     microseconds delta = duration_cast<microseconds>(now - prev);
+
+    init();
 
     while (window.isOpen()) {
 
@@ -63,8 +71,7 @@ int main()
                 }
             }
             window.clear();
-            update();
-            draw(&window);
+            update(&window);
             window.display();
         } else {
             //frames will always be lower than the max tho

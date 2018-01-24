@@ -13,4 +13,3 @@ Object::~Object()
 {
     free(this->boxes);
 }
-

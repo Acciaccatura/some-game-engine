@@ -6,7 +6,7 @@
 class RegularHitbox: public Hitbox
 {
     public:
-        RegularHitbox(double, double);
+        RegularHitbox(double, double, double, int);
         virtual ~RegularHitbox();
 
         Point* get_vertices();
@@ -19,9 +19,7 @@ class RegularHitbox: public Hitbox
         virtual void draw(sf::RenderWindow*, sf::Color) override;
 
         static RegularHitbox* rectangle(double, double, double, double);
-        static RegularHitbox* regular_polygon(double, double, int, double);
     protected:
-
         virtual bool collides(Hitbox*);
 
     private:
